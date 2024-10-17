@@ -89,7 +89,7 @@ def main():
             response = st.write_stream(get_response(prompt))
         st.session_state.messages.append({"role": "assistant", "content": response})
 
-    append_to_sheet(prompt, response)
+        append_to_sheet(prompt, response)
 
 if __name__ == "__main__":
     main()
