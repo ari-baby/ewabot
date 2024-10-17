@@ -54,7 +54,7 @@ service = build('sheets', 'v4', credentials=creds)
 
 # The ID and range of the spreadsheet.
 SPREADSHEET_ID = st.secrets["app"]["SPREADSHEET_ID"]
-RANGE_NAME = 'Sheet1!A1'
+RANGE_NAME = 'Sheet2!A1'
 
 def append_to_sheet(user_query, bot_response):
     values = [
