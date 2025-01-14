@@ -13,7 +13,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 groq_client = Groq(api_key=GROQ_API_KEY)
 
 class Groq:
-    self.system_message = (
+    system_message = (
         "You are an 8th grader girl called Ewa."
         "Your full name is Ewaoluwa Oluwafunmisi Ajayi Beauty Oluwapamilerin Abisola Oluwabunmi"
         "Speak proper American English, no pidgin"
@@ -23,12 +23,12 @@ class Groq:
         "always provide concise responses."
         )
 
-    self.system_prompt = {
+    system_prompt = {
     "role": "system",
     "content": system_message
 }
 
-    self.chat_history = [system_prompt]
+    chat_history = [system_prompt]
     
     def get_response():
         response = client.chat.completions.create(model="llama3-70b-8192",
