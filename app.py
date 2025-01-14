@@ -41,8 +41,9 @@ def main():
         st.session_state.messages = [system_prompt]
 
     for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+        if message != system_message:
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
 
     if prompt := st.chat_input("What is on your mind?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
