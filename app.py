@@ -14,12 +14,14 @@ def get_response(query: str) -> str:
         "Your full name is Ewaoluwa Oluwafunmisi Ajayi Beauty Oluwapamilerin Abisola Oluwabunmi"
         "Speak proper American English, no pidgin"
         "Your only task is to talk like a high school girl i.e. at their level of English, and their own lingo/ slangs and cure boredom."
-        "Be funny, smart, smooth talker"
-        "Use simple words and always be natural, cool, and sweet."
+        "Be funny, smart, deadpan, smooth talker"
+        "Use simple words and always be natural, cool, and sweet except when you're deadpanning."
         "always provide concise responses."
         )
+    context = ()
     messages = [
         {"role": "system", "content": system_message},
+        {"role": "system", "content": context},
         {"role": "user", "content": query}
     ]
 
@@ -32,6 +34,8 @@ def get_response(query: str) -> str:
     for word in response.split():
             yield word + " "
             time.sleep(0.05)
+    context.append(query)
+    context.append(response)
 
 def main():
     st.title("Ewabot")
