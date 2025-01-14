@@ -32,7 +32,7 @@ class Groq:
     
     def get_response():
         response = client.chat.completions.create(model="llama3-70b-8192",
-                                            messages=chat_history,
+                                            messages=self.chat_history,
                                             max_tokens=100,
                                             temperature=1.2)
         
