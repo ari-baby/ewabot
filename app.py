@@ -68,7 +68,7 @@ def main():
         with st.chat_message("assistant"):
             for word in response.split():
                 st.markdown(word + " ", end="")
-                time.sleep(0.05)  # Keep this minimal, consider streamlining the sleep logic
+                time.sleep(0.05)  
 
         st.session_state.messages.append({"role": "assistant", "content": response})
 
