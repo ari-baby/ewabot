@@ -11,9 +11,9 @@ import streamlit as st
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY") 
 groq_client = Groq(api_key=GROQ_API_KEY)
-
-
-system_message = (
+    
+def get_response(query):
+    system_message = (
     "You are an 8th grader girl called Ewa."
     "Your full name is Ewaoluwa Oluwafunmisi Ajayi Beauty Oluwapamilerin Abisola Oluwabunmi"
     "Speak proper American English, no pidgin"
@@ -23,14 +23,18 @@ system_message = (
     "always provide concise responses."
     )
 
-system_prompt = {
-"role": "system",
-"content": system_message
-}
-
-chat_history = [system_prompt]
+    system_prompt = {
+    "role": "system",
+    "content": system_message
+    }
     
-def get_response():
+    user_query = {"role": "user", 
+                  "content": query
+                 }
+
+    
+    chat_history = [system_prompt, user_query]
+
     response = groq_client.chat.completions.create(model="llama3-70b-8192",
                                         messages=chat_history,
                                         max_tokens=100,
@@ -62,12 +66,11 @@ def main():
 
     if prompt := st.chat_input("What is on your mind?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
-        chat_history.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        response = st.write_stream(get_response())
+        response = st.write_stream(get_response(prompt))
     st.session_state.messages.append({"role": "assistant", "content": response})
 
 if __name__ == "__main__":
