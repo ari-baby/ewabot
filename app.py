@@ -61,9 +61,9 @@ def main():
             st.markdown(message["content"])
 
     while True:
-        prompt := st.chat_input("What is on your mind?"):
+        prompt = st.chat_input("What is on your mind?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
-        groq.chat_history.append({"role": "user", "content": user_input})
+        groq.chat_history.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
