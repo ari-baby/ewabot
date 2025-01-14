@@ -41,7 +41,9 @@ def get_response():
         "content": chat_response
     })
 
-    return chat_response
+    for word in chat_response.split():
+        yield word + " "
+        time.sleep(0.05)
 
 
 def main():
@@ -51,24 +53,19 @@ def main():
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    # Display the chat history
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    # Handle user input
     if prompt := st.chat_input("What is on your mind?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         chat_history.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        # Generate and display assistant response
         response = get_response()
         with st.chat_message("assistant"):
-            for word in response.split():
-                st.markdown(word + " ", end="")
-                time.sleep(0.05)  
+            st.write_stream(response)
 
         st.session_state.messages.append({"role": "assistant", "content": response})
 
