@@ -68,7 +68,7 @@ def main():
             st.markdown(prompt)
 
         with st.chat_message("assistant"):
-            response = st.write_stream(groq.get_response(prompt))
+            response = st.write_stream(groq.get_response())
         st.session_state.messages.append({"role": "assistant", "content": response})
 
 if __name__ == "__main__":
