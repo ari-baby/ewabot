@@ -31,7 +31,7 @@ system_prompt = {
 chat_history = [system_prompt]
     
 def get_response():
-    response = client.chat.completions.create(model="llama3-70b-8192",
+    response = groq_client.chat.completions.create(model="llama3-70b-8192",
                                         messages=chat_history,
                                         max_tokens=100,
                                         temperature=1.2)
