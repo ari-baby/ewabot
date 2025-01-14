@@ -3,10 +3,6 @@ import json
 import time
 import os
 from groq import Groq
-from langchain.chains import ConversationChain
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
-from langchain_groq import ChatGroq
-from langchain.prompts import PromptTemplate
 import streamlit as st
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY") 
@@ -32,8 +28,7 @@ def get_response(query):
     chat_history = [system_prompt]
 
     
-    while True:
-          chat_history.append({"role": "user", "content": query})
+    chat_history.append({"role": "user", "content": query})
 
     response = groq_client.chat.completions.create(model="llama3-70b-8192",
                                         messages=chat_history,
