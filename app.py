@@ -60,16 +60,15 @@ def main():
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
 
-    while True:
-        if prompt := st.chat_input("What is on your mind?"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            groq.chat_history.append({"role": "user", "content": prompt})
-            with st.chat_message("user"):
-                st.markdown(prompt)
+    if prompt := st.chat_input("What is on your mind?"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        groq.chat_history.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-        with st.chat_message("assistant"):
-            response = st.write_stream(groq.get_response())
-        st.session_state.messages.append({"role": "assistant", "content": response})
+    with st.chat_message("assistant"):
+        response = st.write_stream(groq.get_response())
+    st.session_state.messages.append({"role": "assistant", "content": response})
 
 if __name__ == "__main__":
     main()
