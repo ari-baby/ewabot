@@ -41,7 +41,7 @@ def main():
         st.session_state.messages = [system_prompt]
 
     for message in st.session_state.messages:
-        if message != system_message:
+        if message.key(role) != "system":
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
 
