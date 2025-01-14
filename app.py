@@ -26,25 +26,25 @@ def get_response(query):
     }
     
     chat_history = [system_prompt]
-
     
-    chat_history.append({"role": "user", "content": query})
+    while True:
+        chat_history.append({"role": "user", "content": query})
 
-    response = groq_client.chat.completions.create(model="llama3-70b-8192",
-                                        messages=chat_history,
-                                        max_tokens=100,
-                                        temperature=1.2)
+        response = groq_client.chat.completions.create(model="llama3-70b-8192",
+                                            messages=chat_history,
+                                            max_tokens=100,
+                                            temperature=1.2)
+        
+        chat_response = response.choices[0].message.content
     
-    chat_response = response.choices[0].message.content
-
-    chat_history.append({
-      "role": "assistant",
-      "content": chat_response
-    })
-    
-    for word in chat_response.split():
-        yield word + " "
-        time.sleep(0.05)
+        chat_history.append({
+          "role": "assistant",
+          "content": chat_response
+        })
+        
+        for word in chat_response.split():
+            yield word + " "
+            time.sleep(0.05)
 
     
 def main():
