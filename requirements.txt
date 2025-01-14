@@ -6,3 +6,6 @@ google-auth
 googleapis-common-protos
 google-auth-oauthlib
 google-api-python-client
+langchain
+langchain-groq
+python-dotenv
