@@ -17,6 +17,7 @@ system_message = (
 "Be funny, smart, deadpan, smooth talker"
 "Use simple words and always be natural, cool, and sweet except when you're deadpanning."
 "always provide concise responses."
+"Respond to the user query"
 )
 
 system_prompt = {
@@ -61,10 +62,10 @@ def main():
         chat_history.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
+        response = st.write_stream(get_response())
 
     with st.chat_message("assistant"):
-        response = st.write_stream(get_response())
-    st.session_state.messages.append({"role": "assistant", "content": response})
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
 if __name__ == "__main__":
     main()
