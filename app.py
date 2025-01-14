@@ -32,7 +32,9 @@ def get_response(chat_history):
     
     chat_response = response.choices[0].message.content
 
-    return chat_response
+    for word in chat_response.split():
+            yield word + " "
+            time.sleep(0.05)
 
 def main():
     st.title("Ewabot")
@@ -41,7 +43,7 @@ def main():
         st.session_state.messages = [system_prompt]
 
     for message in st.session_state.messages:
-        if message.key(role) != "system":
+        if message != system_prompt:
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
 
@@ -54,9 +56,9 @@ def main():
         response = get_response(st.session_state.messages)
         
         with st.chat_message("assistant"):
-            st.markdown(response)
+            chat_response = st.write_stream(response)
         
-        st.session_state.messages.append({"role": "assistant", "content": response})
+        st.session_state.messages.append({"role": "assistant", "content": chat_response})
 
 if __name__ == "__main__":
     main()
