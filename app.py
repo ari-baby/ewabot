@@ -65,7 +65,7 @@ def main():
 
         response = get_response()
         with st.chat_message("assistant"):
-            st.write_stream(response)
+            response = st.write_stream(response)
 
         st.session_state.messages.append({"role": "assistant", "content": response})
 
