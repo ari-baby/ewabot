@@ -13,6 +13,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 groq_client = Groq(api_key=GROQ_API_KEY)
     
 def get_response(query):
+    
     system_message = (
     "You are an 8th grader girl called Ewa."
     "Your full name is Ewaoluwa Oluwafunmisi Ajayi Beauty Oluwapamilerin Abisola Oluwabunmi"
@@ -28,12 +29,11 @@ def get_response(query):
     "content": system_message
     }
     
-    user_query = {"role": "user", 
-                  "content": query
-                 }
+    chat_history = [system_prompt]
 
     
-    chat_history = [system_prompt, user_query]
+    while True:
+          chat_history.append({"role": "user", "content": query})
 
     response = groq_client.chat.completions.create(model="llama3-70b-8192",
                                         messages=chat_history,
