@@ -43,7 +43,7 @@ class Groq:
           "content": chat_response
         })
         
-        for word in response.split():
+        for word in chat_response.split():
             yield word + " "
             time.sleep(0.05)
 
